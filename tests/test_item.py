@@ -7,6 +7,9 @@ Item.pay_rate = 0.75
 
 assert Item.all == [item1, item2]
 
+assert repr(item2) == "Item('Парогенератор', 200, 5)"
+assert str(item2) == 'Парогенератор'
+
 
 def test_calculate_total_price():
     assert item1.price * item1.quantity == 200000
