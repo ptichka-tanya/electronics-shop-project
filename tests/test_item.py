@@ -16,6 +16,10 @@ def test_item_str():
     assert str(item2) == 'Парогенератор'
 
 
+def test_item_add():
+    assert item1 + item2 == 25
+
+
 def test_calculate_total_price():
     assert item1.price * item1.quantity == 200000
     assert item1.calculate_total_price() == 200000
