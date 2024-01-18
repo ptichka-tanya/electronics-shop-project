@@ -12,11 +12,11 @@ def test_phone_repr():
 
 def test_number_of_sim_value_error():
     with pytest.raises(ValueError):
-        assert phone1.number_of_sim == 2.0
+        phone1.number_of_sim = 2.0
     with pytest.raises(ValueError):
-        assert phone1.number_of_sim == "sdsdfsdf"
+        phone1.number_of_sim = "sdsdfsdf"
     with pytest.raises(ValueError):
-        assert phone1.number_of_sim == -10
+        phone1.number_of_sim = -10
 
 
 def test_number_of_sim():
