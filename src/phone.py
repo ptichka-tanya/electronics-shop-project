@@ -18,10 +18,6 @@ class Phone(Item):
 
     @number_of_sim.setter
     def number_of_sim(self, number_of_sim):
-        if number_of_sim <= 0:
-            assert ValueError("Количество сим-карт должно быть целым неотрицательным числом.")
-        else:
-            if number_of_sim is float:
-                assert ValueError("Количество сим-карт должно быть целым неотрицательным числом.")
-            else:
-                self.__number_of_sim = number_of_sim
+        if not isinstance(number_of_sim, int) or number_of_sim <= 0:
+            raise ValueError("Количество сим-карт должно быть целым неотрицательным числом.")
+        self.__number_of_sim = number_of_sim
