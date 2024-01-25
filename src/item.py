@@ -1,5 +1,8 @@
 import csv
+import os.path
 from pathlib import Path
+
+from src.csv_error import InstantiateCSVError
 
 
 class Item:
@@ -71,13 +74,18 @@ class Item:
         :param file_path: Путь к CSV-файлу с данными.
         :return: Экземпляры класса.
         """
-        cls.all = []
-        current_file_path = Path(__file__)
-        file_path = current_file_path.parent.parent / file_path
-        with open(file_path, 'r', newline='', encoding='windows - 1251') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                cls(row['name'], float(row['price']), int(row['quantity']))
+        try:
+            cls.all = []
+            current_file_path = Path(__file__)
+            file_path = current_file_path.parent.parent / file_path
+            with open(file_path, 'r', newline='', encoding='windows - 1251') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    cls(row['name'], float(row['price']), int(row['quantity']))
+        except FileNotFoundError:
+            raise FileNotFoundError('Отсутствует файл item.csv')
+        except KeyError:
+            raise InstantiateCSVError
 
     @staticmethod
     def string_to_number(string):
