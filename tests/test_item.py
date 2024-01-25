@@ -1,3 +1,6 @@
+import pytest
+
+from src.csv_error import InstantiateCSVError
 from src.item import Item
 
 item1 = Item("Смартфон", 10000, 20)
@@ -51,6 +54,14 @@ def test_instantiate_from_csv():
     assert Item.all[0].name == "Смартфон"
     assert Item.all[3].price == 50
     assert Item.all[1].quantity == 3
+
+    with pytest.raises(FileNotFoundError) as ex:
+        Item.instantiate_from_csv('homework-1/item.csv')
+        ex.message = "Отсутствует файл item.csv"
+
+    with pytest.raises(InstantiateCSVError) as ex:
+        Item.instantiate_from_csv('tests/test_items.csv')
+        ex.message = "Файл поврежден"
 
 
 def test_string_to_number():
